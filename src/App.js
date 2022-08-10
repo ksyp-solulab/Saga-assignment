@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import {Route,Routes} from 'react-router-dom';
 import './App.css';
+import Home from './Pages/Home';
+import{ useEffect } from "react";
+import { getUsers } from './Redux/userSlice'
+import {useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    //loading will be false because of saga call
+    dispatch(getUsers())
+    // eslint-disable-next-line
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+        </Routes>
     </div>
   );
 }
